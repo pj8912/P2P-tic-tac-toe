@@ -5,7 +5,7 @@ session_start();
 require_once '../vendor/autoload.php';
 
 use TTC\Database\Database;
-use TTCh\Models\User;
+use TTC\Models\User;
 
 
 // error reporting
@@ -23,12 +23,7 @@ if (isset($_SERVER['REQUEST_METHOD']) == 'POST') {
         $uname = strip_tags($_POST['email']);
         $pwd = strip_tags($_POST['pwd']);
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            header("Location: ../index.php?email=invalid");
-            exit();
-        } 
 
-    
     
         $database = new Database();
         $db = $database->connect();
