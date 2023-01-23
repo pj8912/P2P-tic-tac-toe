@@ -1,27 +1,27 @@
 <?php
 
-
-namespace TTC\Models;
+namespace Ttc\Models;
 
 class User
 {
+
 	private $conn;
 	
-    public function __construct($db)
+	public function __construct($db)
 	{
 		$this->conn = $db;
 	}
-
+	
 	private $table = "users";
-	public $user_id, $fullname,$username, $email, $pwd;
+	
+    public $user_id, $fullname, $pwd, $username;
 
 
 	public function check_user()
 	{
 		$sql = "SELECT * FROM {$this->table} WHERE user_uname = :user_uname";
 		$stmt = $this->conn->prepare($sql);
-		// $stmt->bindParam(':user_email', $this->email);
-        $stmt->bindParam(':user_uname', $this->username);
+		$stmt->bindParam(':user_uname', $this->username);
 		$stmt->execute();
 		return $stmt;
 	}
@@ -39,14 +39,14 @@ class User
 
 	public function createUser()
 	{
-		$sql = "INSERT INTO {$this->table}(user_fullname, user_uname, user_email, user_pwd, created_at)
-		 VALUES(:user_fullname, :user_uname , :user_email, :user_pwd, NOW())";
+		$sql = "INSERT INTO {$this->table}(user_fullname, user_uname, user_pwd, created_at) VALUES(:user_fullname, :user_uname, :user_pwd, NOW())";
+
 		$stmt = $this->conn->prepare($sql);
+
 		$stmt->bindParam(':user_fullname', $this->fullname);
 		$stmt->bindParam(':user_uname', $this->username);
-
-		$stmt->bindParam(':user_email', $this->email);
 		$stmt->bindParam(':user_pwd', $this->pwd);
+
 		$stmt->execute();
 	}
 
@@ -59,4 +59,3 @@ class User
 	
 	
 }
-

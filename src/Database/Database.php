@@ -1,10 +1,9 @@
 <?php
+namespace Ttc\Database;
 
-namespace TTC\Database;
-
-class Datbase{
-
-    private $host = 'localhost';
+class Database{
+    
+	private $host = 'localhost';
 	private $uname = 'root';
 	private $pwd = '';
 	private $db = 'ttc';
@@ -22,5 +21,7 @@ class Datbase{
 		return $this->conn;
 	}
 
+    public static function testing(){
+        echo "working";
+    }
 }
-
